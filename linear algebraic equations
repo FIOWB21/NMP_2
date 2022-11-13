@@ -1,0 +1,121 @@
+import numpy as np
+   a = np.matrix('1 2; 4 -1') 
+   b = np.matrix('2 -3; -4 1') 
+   x = a.dot(b)
+   x1 = b.dot(a)
+   x2=x1-x
+   print(x2)
+
+import numpy as np
+   a = np.array([[-1,0,2], [0,1,0], [1,2,-1]])
+   result = np.linalg.matrix_power(a, 2)
+   print(result)
+   
+   
+import numpy as np
+   a = np.array([[5,8,-4], [6,9,-5], [4,7,-3]]) 
+   b = np.array([[3,2,5], [4,-1,3], [9,6,5]])
+   matrix_prod = a.dot(b) 
+   print(matrix_prod)
+
+import numpy as np
+   a = np.array([ [0,2,0],[3,4,5],[6,7,8]])
+   print(np.linalg.det(a))
+
+
+import numpy as np
+   a = np.array([ [2,3,4,1],[1,2,3,4],[3,4,2,1],[4,1,2,3]])
+   print(np.linalg.det(a))
+
+
+import numpy as np
+   A = np.array([[2,5,7],[6,3,4],[5,-2,-3]]) 
+   A_inv = np.linalg.inv(A) 
+   print(A_inv)
+
+
+import numpy as np
+   A = np.array([[1,-1,3,4],[0,-1,2,1],[1,1,-1,2],[2,3,-5,3]]) 
+   rank = np.linalg.matrix_rank(A) 
+   print(rank)
+
+
+import numpy as np
+   A = np.matrix('1 -2 3; 2 -1 2; 3 2 2') 
+   B = np.matrix('4; 3; 2') 
+   print('A=', A) 
+   print('B=',B) 
+   A_inv = np.linalg.inv(A) 
+   print(A_inv) 
+   X = A_inv.dot(B) 
+   print('X=',X) 
+   X1 = np.linalg.solve(A, B) 
+   print('proverka X=',X1)
+
+
+import numpy as np
+a = np.matrix('1 -2 3; 2 -1 2; 3 2 2') 
+b = np.matrix('4; 3; 2') 
+print('A=',a) 
+print('B=',b) 
+
+def kramer (a, b): 
+    a_det = np.linalg.det(a) 
+    print('Matrix determinant = ', a_det) 
+
+
+    if (a_det != 0): 
+        print ('solve the system') 
+        x_m = np.matrix(a) 
+        x_m[:, 0] = b 
+        print('x_m=', x_m) 
+        y_m = np.matrix(a)  
+        y_m[:, 1] = b 
+        print('y_m=',y_m) 
+        z_m = np.matrix(a) 
+        z_m[:, 2] = b 
+        print('z_m=',z_m) 
+        x = np.linalg.det(x_m) / a_det 
+        y = np.linalg.det(y_m) / a_det 
+        z = np.linalg.det(z_m) / a_det 
+        print('X = ', round(x,5)) 
+        print('Y=', round(y,5)) 
+        print('Z=', round(z,5)) 
+    else: 
+        print('there are no solutions') 
+
+kramer(a,b) 
+X1 = np.linalg.solve(a, b) 
+print('checking X=',X1)
+
+
+from random import randint
+ 
+def print_array(arr):
+    arr = list(map(list, zip(*arr)))
+    for i in range(len(arr)):
+        k = len(max(list(map(str, arr[i])),  key=len))
+        arr[i] = [f'{elem:{k}d}' for elem in arr[i]]
+    arr = list(map(list, zip(*arr)))
+    for row in arr:
+        print(*row)
+ 
+ 
+n, m = int(input('rows: ')), int(input('columns: '))
+ 
+arr = [[randint(-9, 9) for j in range(m)] for i in range(n)]
+print_array(arr)
+ 
+n_col = [0]*(m+1)
+for i in range(n):
+    n_row = 0
+    for j in range(m):
+        if arr[i][j] < 0:
+            n_row += 1
+            n_col[j] += 1
+    arr[i].append(n_row)
+arr.append(n_col)
+arr[-1][-1] = sum(n_col)
+ 
+print()
+print_array(arr)
