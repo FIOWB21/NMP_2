@@ -1,0 +1,15 @@
+import math
+
+x1=18
+x2=17/11
+x1_1=4.24
+x2_2=1.545
+def f (x1, x1_1, x2, x2_2)
+    dx1 = abs((math.sqrt(x1) - x1_1)/ math.sqrt(x1))
+
+    dx2=abs((x2-x2_2)/x2)
+    if (dx1>dx2):
+        print ("second equality is more accurate")
+    else:
+        print ("first equality is more accurate ")
+f(x1,x1_1,x2,x2_2)
