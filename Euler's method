@@ -1,0 +1,24 @@
+import numpy as np
+import math
+ 
+def function(xy):
+    x, y = map(float, xy.tolist())
+    return x+math.sin(y/math.radians(180))
+ 
+y0 = 5.3
+h = 0.1
+t = [0 + i/11 for i in range(11)]
+ 
+print("Euler's method")
+def euler(xy, h = 0.1, n = 10000):
+    x = xy[0]
+    xy[0] = 0.
+    while x - xy[0] > 0:
+        xy = xy + np.array([h, h * function(xy)])
+    return xy
+ 
+for x in t :
+    fxy = np.array([x,y0])
+    print('x = {:.1f} y = {:.3f}'.format(*map(float, euler(fxy, h).tolist())))
+ 
+print()
